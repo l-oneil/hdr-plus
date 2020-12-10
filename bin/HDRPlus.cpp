@@ -8,31 +8,35 @@
 #include <include/stb_image_write.h>
 
 #include <src/Burst.h>
-#include <hdrplus_pipeline/hdrplus_pipeline.h>
+#include <hdrplus_pipeline.h>
 
 /*
  * HDRPlus Class -- Houses file I/O, defines pipeline attributes and calls
  * processes main stages of the pipeline.
  */
 class HDRPlus {
-    const Burst& burst;
+    // const Burst& burst;
 public:
     const Compression c;
     const Gain g;
     
-    HDRPlus(Burst burst, const Compression  c, const Gain g)
-        : burst(burst)
-        , c(c)
+    // HDRPlus(Burst burst, const Compression  c, const Gain g)
+    HDRPlus(const Compression  c, const Gain g)
+        // : burst(burst)
+        // , c(c)
+        // , g(g)
+        : c(c)
         , g(g)
     {
     }
     
-    Halide::Runtime::Buffer<uint8_t> process() {
+    Halide::Runtime::Buffer<uint8_t> process(Burst &burst) {
         const int width = burst.GetWidth();
         const int height = burst.GetHeight();
 
+        std::cout << "Width: "<< width << " Height: " << height << std::endl;
         Halide::Runtime::Buffer<uint8_t> output_img(3, width, height);
-
+        
         std::cerr << "Black point: " << burst.GetBlackLevel() << std::endl;
         std::cerr << "White point: " << burst.GetWhiteLevel() << std::endl;
         
@@ -110,9 +114,10 @@ int main(int argc, char* argv[]) {
 
     Burst burst(dir_path, in_names);
 
-    HDRPlus hdr_plus(burst, c, g);
+    // HDRPlus hdr_plus(burst, c, g);
+    HDRPlus hdr_plus(c, g);
 
-    Halide::Runtime::Buffer<uint8_t> output = hdr_plus.process();
+    Halide::Runtime::Buffer<uint8_t> output = hdr_plus.process(burst);
 
     if (!HDRPlus::save_png(dir_path, out_name, output)) {
         return EXIT_FAILURE;

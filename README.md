@@ -1,3 +1,8 @@
+# Changes from Original:
+1. Updated to work with [Halide v10](https://github.com/halide/Halide/releases/tag/v10.0.0) and new CMake Infastructure
+
+
+# Original README:
 Note: The user "Titaniumtown" is now the primary maintainer of this repository; if you need to contact the owner contact "Titaniumtown".
 
 # HDR+ Implementation

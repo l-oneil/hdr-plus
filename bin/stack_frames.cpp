@@ -5,9 +5,9 @@
 #include <Halide.h>
 #include <halide_image_io.h>
 
-#include <src/Burst.h>
+#include <Burst.h>
 
-#include <align_and_merge/align_and_merge.h>
+#include <align_and_merge.h>
 
 Halide::Runtime::Buffer<uint16_t> align_and_merge(Halide::Runtime::Buffer<uint16_t> burst) {
     if (burst.channels() < 2) {

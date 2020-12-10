@@ -27,10 +27,10 @@ namespace {
 
         void generate() {
             // Algorithm
-            Func alignment = align(inputs, inputs.width(), inputs.height());
-            Func merged = merge(inputs, inputs.width(), inputs.height(), inputs.dim(2).extent(), alignment);
             CompiletimeWhiteBalance wb{ white_balance_r, white_balance_g0, white_balance_g1, white_balance_b };
-            Func finished = finish(merged, inputs.width(), inputs.height(), black_point, white_point, wb, cfa_pattern, ccm, compression, gain);
+            Func alignment = align(inputs, inputs.width(), inputs.height());
+            Func merged    = merge(inputs, inputs.width(), inputs.height(), inputs.dim(2).extent(), alignment);
+            Func finished  = finish(merged, inputs.width(), inputs.height(), black_point, white_point, wb, cfa_pattern, ccm, compression, gain);
             output = finished;
             // Schedule handled inside included functions
         }

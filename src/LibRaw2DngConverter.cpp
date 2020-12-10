@@ -1,5 +1,6 @@
 #include "LibRaw2DngConverter.h"
 
+#include <array>
 #include <unordered_map>
 
 #include <libraw/libraw.h>

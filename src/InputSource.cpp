@@ -1,5 +1,6 @@
 #include "InputSource.h"
 
+#include <array>
 #include <algorithm>
 #include <unordered_map>
 
